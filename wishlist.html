@@ -12,6 +12,11 @@
 <body>
   <header class="site-header scrolled">
     <a href="index.html" class="logo">Anna</a>
+    <button class="menu-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <nav>
       <a href="introduction.html">Introduction</a>
       <a href="photos.html">Photos</a>
@@ -24,5 +29,20 @@
     <h2 class="subpage-title">Wishlist</h2>
     <p class="subpage-text">Dreams, wishes, and things that would make Anna smile.</p>
   </section>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.site-header nav');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('open');
+        nav.classList.remove('open');
+      });
+    });
+  </script>
 </body>
 </html>

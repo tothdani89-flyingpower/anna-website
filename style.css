@@ -11,6 +11,8 @@ html {
 body {
   font-family: 'Inter', sans-serif;
   color: #333;
+  -webkit-text-size-adjust: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ── Header ── */
@@ -426,4 +428,131 @@ body {
   text-align: center;
   line-height: 1.8;
   animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+/* ── Hamburger button ── */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 101;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #ff69b4;
+  margin: 6px 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* ── Mobile styles ── */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .site-header {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .site-header nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    height: 100dvh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: right 0.4s ease;
+    box-shadow: -4px 0 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .site-header nav.open {
+    right: 0;
+  }
+
+  .site-header nav a {
+    font-size: 1.1rem;
+    color: #666;
+    text-shadow: none;
+  }
+
+  .site-header nav a.active {
+    color: #ff69b4;
+  }
+
+  .cover {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .cover-content {
+    padding: 1rem;
+  }
+
+  .scroll-hint {
+    margin-top: 2rem;
+  }
+
+  .content {
+    background-attachment: scroll;
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  .butterfly {
+    font-size: 1.5rem !important;
+  }
+
+  .b5, .b7, .b8 {
+    display: none;
+  }
+
+  .subpage {
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  .subpage-text {
+    font-size: 1.05rem;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .logo {
+    font-size: 1.6rem;
+  }
+
+  .site-header nav {
+    width: 80%;
+  }
+
+  .butterfly {
+    font-size: 1.2rem !important;
+  }
+
+  .b3, .b4, .b6 {
+    display: none;
+  }
 }
