@@ -66,11 +66,6 @@
     }, { threshold: 0.2 });
     reveals.forEach(el => observer.observe(el));
 
-    const header = document.querySelector('.site-header');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 80);
-    });
-
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.site-header nav');
     toggle.addEventListener('click', () => {
