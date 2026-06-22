@@ -10,6 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <header class="site-header">
+    <a href="index.html" class="logo">Anna</a>
+    <nav>
+      <a href="introduction.html">Introduction</a>
+      <a href="photos.html">Photos</a>
+      <a href="quotes.html">Quotes</a>
+      <a href="wishlist.html">Wishlist</a>
+    </nav>
+  </header>
+
   <section class="cover">
     <div class="cover-bg"></div>
     <div class="cover-overlay"></div>
@@ -25,9 +35,36 @@
     </div>
   </section>
 
+  <div class="transition-fade"></div>
+
   <section id="welcome" class="content">
-    <h2>Welcome</h2>
-    <p>This is where your story begins.</p>
+    <div class="butterfly b1">&#129419;</div>
+    <div class="butterfly b2">&#129419;</div>
+    <div class="butterfly b3">&#129419;</div>
+    <div class="butterfly b4">&#129419;</div>
+    <div class="butterfly b5">&#129419;</div>
+    <div class="butterfly b6">&#129419;</div>
+    <div class="butterfly b7">&#129419;</div>
+    <div class="butterfly b8">&#129419;</div>
+    <h2 class="reveal">Welcome</h2>
+    <p class="reveal">This is where your story begins.</p>
   </section>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+    reveals.forEach(el => observer.observe(el));
+
+    const header = document.querySelector('.site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 80);
+    });
+  </script>
 </body>
 </html>

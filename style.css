@@ -13,6 +13,84 @@ body {
   color: #333;
 }
 
+/* ── Header ── */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background 0.4s, box-shadow 0.4s;
+}
+
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  font-family: 'Caveat', cursive;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ff69b4;
+  text-decoration: none;
+  text-shadow: 0 1px 8px rgba(255, 105, 180, 0.3);
+}
+
+.site-header nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.site-header nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: color 0.3s;
+}
+
+.site-header.scrolled nav a {
+  color: #666;
+  text-shadow: none;
+}
+
+.site-header nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #ff69b4;
+  transition: width 0.3s ease;
+}
+
+.site-header nav a:hover {
+  color: #ff69b4;
+}
+
+.site-header nav a:hover::after {
+  width: 100%;
+}
+
+.site-header.scrolled .logo {
+  text-shadow: none;
+}
+
 /* ── Cover Section ── */
 .cover {
   position: relative;
@@ -117,15 +195,182 @@ body {
   50%      { transform: translateY(8px); }
 }
 
+/* ── Transition between sections ── */
+.transition-fade {
+  position: relative;
+  height: 30vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 240, 245, 0.4) 30%,
+    rgba(255, 220, 235, 0.7) 60%,
+    rgba(255, 200, 220, 0.9) 100%
+  );
+  margin-top: -30vh;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ── Content Section ── */
 .content {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
-  background: #fafafa;
+  background: url('assets/welcome-bg.jpeg') center center / cover no-repeat fixed;
+  overflow: hidden;
+}
+
+.content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 240, 245, 0.55);
+  z-index: 0;
+}
+
+.content h2,
+.content p,
+.butterfly {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Butterflies ── */
+.butterfly {
+  position: absolute;
+  font-size: 2.5rem;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.b1 {
+  top: 10%; left: 5%;
+  font-size: 2rem;
+  animation: fly1 12s infinite ease-in-out, flutter 0.4s infinite alternate;
+  color: #ff69b4;
+}
+.b2 {
+  top: 20%; right: 10%;
+  font-size: 3rem;
+  animation: fly2 15s infinite ease-in-out, flutter 0.35s infinite alternate;
+  color: #da70d6;
+}
+.b3 {
+  bottom: 30%; left: 15%;
+  font-size: 1.8rem;
+  animation: fly3 10s infinite ease-in-out, flutter 0.45s infinite alternate;
+  color: #ff85c8;
+}
+.b4 {
+  top: 50%; right: 5%;
+  font-size: 2.2rem;
+  animation: fly4 14s infinite ease-in-out, flutter 0.3s infinite alternate;
+  color: #c471ed;
+}
+.b5 {
+  bottom: 15%; left: 40%;
+  font-size: 2.8rem;
+  animation: fly5 11s infinite ease-in-out, flutter 0.38s infinite alternate;
+  color: #f093fb;
+}
+.b6 {
+  top: 15%; left: 55%;
+  font-size: 1.6rem;
+  animation: fly6 13s infinite ease-in-out, flutter 0.42s infinite alternate;
+  color: #ff6eb4;
+}
+.b7 {
+  bottom: 40%; right: 20%;
+  font-size: 2.4rem;
+  animation: fly7 16s infinite ease-in-out, flutter 0.33s infinite alternate;
+  color: #e0a0ff;
+}
+.b8 {
+  top: 70%; left: 10%;
+  font-size: 2rem;
+  animation: fly8 12.5s infinite ease-in-out, flutter 0.4s infinite alternate;
+  color: #ffb6c1;
+}
+
+@keyframes flutter {
+  from { transform: scaleX(1) rotate(-5deg); }
+  to   { transform: scaleX(-1) rotate(5deg); }
+}
+
+@keyframes fly1 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(60vw, -10vh); }
+  50%  { transform: translate(30vw, 15vh); }
+  75%  { transform: translate(70vw, 5vh); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes fly2 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-50vw, 12vh); }
+  50%  { transform: translate(-20vw, -8vh); }
+  75%  { transform: translate(-60vw, 10vh); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes fly3 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(40vw, -20vh); }
+  50%  { transform: translate(65vw, -5vh); }
+  75%  { transform: translate(20vw, -15vh); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes fly4 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-40vw, -15vh); }
+  50%  { transform: translate(-70vw, 8vh); }
+  75%  { transform: translate(-30vw, -10vh); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes fly5 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(25vw, -25vh); }
+  50%  { transform: translate(-15vw, -40vh); }
+  75%  { transform: translate(35vw, -15vh); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes fly6 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-30vw, 20vh); }
+  50%  { transform: translate(20vw, 30vh); }
+  75%  { transform: translate(-10vw, 10vh); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes fly7 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-45vw, -12vh); }
+  50%  { transform: translate(10vw, -25vh); }
+  75%  { transform: translate(-55vw, 5vh); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes fly8 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(50vw, 10vh); }
+  50%  { transform: translate(75vw, -10vh); }
+  75%  { transform: translate(30vw, 15vh); }
+  100% { transform: translate(0, 0); }
 }
 
 .content h2 {
@@ -142,4 +387,43 @@ body {
   max-width: 600px;
   text-align: center;
   line-height: 1.7;
+}
+
+/* ── Active nav link ── */
+.site-header nav a.active {
+  color: #ff69b4;
+}
+
+.site-header nav a.active::after {
+  width: 100%;
+}
+
+/* ── Subpages ── */
+.subpage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 4rem;
+  background: linear-gradient(135deg, #fff0f5 0%, #f8f0ff 50%, #f0f8ff 100%);
+}
+
+.subpage-title {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: #ff69b4;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 1s ease-out both;
+}
+
+.subpage-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #666;
+  max-width: 600px;
+  text-align: center;
+  line-height: 1.8;
+  animation: fadeInUp 1s ease-out 0.3s both;
 }
